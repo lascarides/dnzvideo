@@ -20,6 +20,32 @@ class OpeningGallery: SKNode, Advanceable {
 
     let logo = SKSpriteNode(texture: SKTexture(imageNamed: "\(Settings.homePath)/logo.png"))
 
+    var titleColours = [
+        Colour.clear,
+        Colour.clear,
+        Colour.clear,
+        Colour.clear,
+        Colour.yello, // 4.jpg
+        Colour.sky,
+        Colour.white,
+        Colour.red,
+        Colour.deepBlue, // 8.jpg
+        Colour.dark,
+        Colour.gold,
+        Colour.white,
+        Colour.sky,
+        Colour.dark,
+        Colour.red,
+        Colour.dark,
+        Colour.gold,
+        Colour.dark,
+        Colour.sky,
+        Colour.white,
+        Colour.gold,
+        Colour.white,
+        Colour.white
+    ]
+
     override init() {
         super.init()
         for i in 0...23 {
@@ -44,7 +70,7 @@ class OpeningGallery: SKNode, Advanceable {
             let scaler = SKEase.scale(easeFunction: .curveTypeLinear, easeType: .easeTypeIn, time: self.duration, from: 1.0, to: 1.1)
             self.images[0].zPosition = self.text.zPosition - 2
             self.images[0].run(scaler)
-            self.logo.color = self.randomColour()
+            self.logo.color = self.titleColours[0]
         }
         let wait = SKAction.wait(forDuration: self.duration * 0.25 * 0.25)
         let advance = SKAction.run {
@@ -60,9 +86,9 @@ class OpeningGallery: SKNode, Advanceable {
         // 1 beat measures
         let wha = SKAction.sequence([show, wait, advance])
         let seq = SKAction.sequence([
-            SKAction.repeat(tahi, count: 4),
-            SKAction.repeat(rua, count: 6),
-            SKAction.repeat(toru, count: 4),
+//            SKAction.repeat(tahi, count: 4),
+//            SKAction.repeat(rua, count: 6),
+//            SKAction.repeat(toru, count: 4),
             SKAction.repeat(wha, count: 8),
             SKAction.run {
                 self.completed = true
@@ -84,7 +110,9 @@ class OpeningGallery: SKNode, Advanceable {
     private func cycleImages() {
         let lastImage = self.images.removeFirst()
         self.images.append(lastImage)
-        
+
+        let lastColour = self.titleColours.removeFirst()
+        self.titleColours.append(lastColour)
     }
     
     private func addText() {
@@ -92,17 +120,5 @@ class OpeningGallery: SKNode, Advanceable {
         text.zPosition = 101
 //        addChild(text)
     }
-
-    private func randomColour() -> NSColor {
-        let colours = [
-            Colour.deepBlue,
-            Colour.gold,
-            Colour.red,
-            Colour.yello,
-            Colour.sky
-        ]
-        return colours.randomElement()!
-    }
-    
 
 }

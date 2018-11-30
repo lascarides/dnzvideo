@@ -36,7 +36,7 @@ class Colour {
     static let warmGray     = NSColor(rgb: 0xC4B9A7)
     static let deepBlue     = NSColor(rgb: 0x146793)
     static let sky          = NSColor(rgb: 0x5C9BAC)
-    static let red          = NSColor(rgb: 0xD91B1D)
+    static let red          = NSColor(rgb: 0x9B2C2B)
     static let gold         = NSColor(rgb: 0xD69B23)
     static let yello        = NSColor(rgb: 0xDCB617)
     static let straw        = NSColor(rgb: 0xF0E9D9)

@@ -91,8 +91,8 @@ class MagicHat: Section {
         addChild(dnzVideo)
         
         trigger(action: SKAction.run{ self.shiftToHarvest() }, delay: Settings.musicBeat * 2)
-        trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: Settings.musicBeat * 4
-        )
+        trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: Settings.musicBeat * 4)
+        trigger(action: SKAction.run{ self.shiftToWebsite() }, delay: Settings.musicBeat * 5)
 
     }
     

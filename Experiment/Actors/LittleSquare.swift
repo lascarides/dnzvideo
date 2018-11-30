@@ -46,6 +46,11 @@ class LittleSquare: SKNode {
         
         self.addChild(matte)
         self.addChild(node)
+        
+        let icon = loadIcon()
+        icon.scale(to: CGSize(width: node.size.width * 0.6, height: node.size.width * 0.6))
+        icon.alpha = 0.4
+        addChild(icon)
 
         self.x = CGFloat(x)
         self.y = CGFloat(y)
@@ -84,9 +89,7 @@ class LittleSquare: SKNode {
     
     func disappear() {
         let wait = SKAction.wait(forDuration: TimeInterval(delay))
-        let hide = SKAction.run {
-            self.alpha = 0.0
-        }
+        let hide = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 1.0, fromValue: 1.0, toValue: 0)
         self.run( SKAction.sequence([wait, hide]))
     }
     
@@ -104,12 +107,15 @@ class LittleSquare: SKNode {
     }
     
     func addVideo() {
+        let cropNode = SKCropNode()
+        cropNode.maskNode = SKSpriteNode(color: Colour.deepBlue, size: CGSize(width: gridW * 3, height: gridH * 3))
         videoNode = VideoPlayer(name: "tractorparade")
         imageNode!.resize(to: CGSize(width: gridW * 3, height: gridH * 3))
         videoNode!.resize(to: imageNode!.maskNode!.frame.size)
         videoNode!.alpha = 0
-        videoNode?.zPosition = 201
-        addChild(videoNode!)
+        cropNode.zPosition = 201
+        cropNode.addChild(videoNode!)
+        addChild(cropNode)
     }
     
     func playVideo() {
@@ -117,5 +123,26 @@ class LittleSquare: SKNode {
         videoNode?.run(fadein)
         videoNode?.start()
     }
+    
+    private func loadIcon() -> SKSpriteNode {
+        let icons = [
+            "archive.png",
+            "find.png",
+            "gallery.png",
+            "govt.png",
+            "library.png",
+            "media.png",
+            "museum.png",
+            "share.png",
+            "use.png"
+        ]
+        let iconName = icons.randomElement()
+        let url = URL(fileURLWithPath: "\(Settings.homePath)/icons/\(iconName!)")
+        let img = NSImage(byReferencing: url)
+        let texture = SKTexture(image: img)
+        let node = SKSpriteNode(texture: texture, color: NSColor.clear, size: texture.size())
+        return node
+    }
+
     
 }

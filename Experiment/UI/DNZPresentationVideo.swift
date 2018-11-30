@@ -38,13 +38,10 @@ class DNZPresentationVideo: SKNode {
         VideoSections.Intro,
         VideoSections.Holdings,
         VideoSections.ContentPartners,
-        VideoSections.DigitalNZOrg,
         VideoSections.TinaVideo,
-        VideoSections.Reliable,
         VideoSections.Stories,
         VideoSections.OliviaVideo,
         VideoSections.API,
-        VideoSections.Supplejack,
         VideoSections.Outro
     ]
     

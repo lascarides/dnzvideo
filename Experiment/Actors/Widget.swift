@@ -47,47 +47,40 @@ class Widget: SKNode {
             icon = loadIcon(name: "find.png")
             matte.fillColor = Colour.red
             label.text = "Find"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Share:
             icon = loadIcon(name: "share.png")
+            icon.color = Colour.dark
+            icon.colorBlendFactor = 0.8
             matte.fillColor = Colour.yello
             label.text = "Share"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Use:
             icon = loadIcon(name: "use.png")
             matte.fillColor = Colour.sky
             label.text = "Use"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Museum:
             icon = loadIcon(name: "museum.png")
             matte.fillColor = Colour.sky
             label.text = "Museums"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Archive:
             icon = loadIcon(name: "archive.png")
             matte.fillColor = Colour.deepBlue
             label.text = "Archives"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Gallery:
             icon = loadIcon(name: "gallery.png")
             matte.fillColor = Colour.yello
             label.text = "Galleries"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Library:
             icon = loadIcon(name: "library.png")
             matte.fillColor = Colour.red
             label.text = "Libraries"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Media:
             icon = loadIcon(name: "media.png")
             matte.fillColor = Colour.gold
             label.text = "Media"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Govt:
             icon = loadIcon(name: "govt.png")
             matte.fillColor = Colour.warmGray
             label.text = "Govt"
-            icon.scale(to: CGSize(width: 60, height: 60))
         case .Natlib:
             icon = loadIcon(name: "natlib.png")
             matte.fillColor = Colour.clear
@@ -96,12 +89,13 @@ class Widget: SKNode {
         case .MagicHat:
             matte.fillColor = Colour.dark
             icon = SKSpriteNode(texture: SKTexture(imageNamed: "\(Settings.homePath)/logo-only.png"))
-            icon.size = matte.frame.size
+            icon.scale(to: matte.frame.size)
             label.removeFromParent()
         }
         
         if type != .MagicHat && type != .Natlib {
             icon.position = CGPoint(x: 0, y: 30)
+            icon.scale(to: CGSize(width: 60, height: 60))
         }
 
         addChild(icon)
@@ -115,7 +109,10 @@ class Widget: SKNode {
     func reveal() {
         let fadein = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 1.0, fromValue: 0.5, toValue: 1)
         let scaler = SKEase.scale(easeFunction: .curveTypeBack, easeType: .easeTypeOut, time: 1.0, from: 0.2, to: 1)
-        let grp = SKAction.group([fadein, scaler])
+        let iconner = SKAction.run {
+            self.iconPizzazz()
+        }
+        let grp = SKAction.group([fadein, scaler, iconner])
         self.run(grp)
     }
     
@@ -125,6 +122,27 @@ class Widget: SKNode {
         icon.size = CGSize(width: 20, height: 20)
         icon.alpha = 0.7
         icon.position = CGPoint(x: 0, y: 0)
+    }
+    
+    func iconPizzazz() {
+        var iconAction: SKAction?
+        switch type! {
+        case .Find:
+            let origScale = icon.xScale
+            let blipIn = SKEase.scale(easeFunction: .curveTypeExpo, easeType: .easeTypeIn, time: 0.5, from: origScale, to: origScale * 2.0)
+            let blipOut = SKEase.scale(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 0.5, from: origScale * 2.0, to: origScale)
+            iconAction = SKAction.sequence([blipIn, blipOut])
+        case .Share:
+            iconAction = SKEase.rotate(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.5, from: 0, to: .pi * 2)
+        case .Use:
+            let spinny = SKAction.rotate(byAngle: .pi, duration: 1.3)
+            iconAction = SKAction.repeatForever(spinny)
+        default:
+            break
+        }
+        if iconAction != nil {
+            icon.run(iconAction!)
+        }
     }
     
     func takeALittleTrip(destination: CGPoint) {

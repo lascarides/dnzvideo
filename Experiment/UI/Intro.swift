@@ -18,14 +18,14 @@ class Intro: Section {
     let logoBox     = SKSpriteNode(color: Colour.red, size: CGSize(width: Screen.xPct(pct: 0.5) - 20, height: Screen.yPct(pct: 0.6) - 20))
     let natlibBox   = SKSpriteNode(color: Colour.sky, size: CGSize(width: Screen.xPct(pct: 0.5) - 20, height: Screen.yPct(pct: 0.6) - 20))
     let findBox     = SKSpriteNode(color: Colour.straw, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
-    let shareBox     = SKSpriteNode(color: Colour.warmGray, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
+    let shareBox     = SKSpriteNode(color: Colour.deepBlue, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
     let useBox     = SKSpriteNode(color: Colour.yello, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
 
     override init() {
         
         super.init()
 
-        natlib.position = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.66))
+        natlib.position = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.7))
         find.position   = CGPoint(x: Screen.xPctCentered(pct: 0.1667), y: Screen.yPctCentered(pct: 0.2))
         share.position  = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.2))
         use.position    = CGPoint(x: Screen.xPctCentered(pct: 0.8333), y: Screen.yPctCentered(pct: 0.2))
@@ -34,17 +34,17 @@ class Intro: Section {
         logo.zPosition = 1000
         logo.setScale(0.35)
         
-        natlib.setScale(1.3)
+        natlib.setScale(1.6)
 
-        find.setScale(1.2)
-        share.setScale(1.2)
-        use.setScale(1.2)
+        find.setScale(1.4)
+        share.setScale(1.4)
+        use.setScale(1.4)
 
-        logoBox.position    = CGPoint(x: Screen.xPctCentered(pct: 0.25), y: Screen.yPctCentered(pct: 0.7))
-        natlibBox.position  = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.7))
-        findBox.position    = CGPoint(x: Screen.xPctCentered(pct: 0.1667), y: Screen.yPctCentered(pct: 0.2))
-        shareBox.position   = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.2))
-        useBox.position     = CGPoint(x: Screen.xPctCentered(pct: 0.8333), y: Screen.yPctCentered(pct: 0.2))
+        logoBox.position    = logo.position
+        natlibBox.position  = natlib.position
+        findBox.position    = find.position
+        shareBox.position   = share.position
+        useBox.position     = use.position
         
         addChild(logoBox)
         addChild(natlibBox)

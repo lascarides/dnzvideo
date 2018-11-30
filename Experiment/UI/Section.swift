@@ -14,7 +14,7 @@ class Section: SKNode, Advanceable {
     var section = VideoSections.Intro
     var voiceover = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/01-find-share-use.m4a"))
     var matte = SKSpriteNode(color: Colour.dark, size: Screen.cgSize())
-    var duration = 11.540
+    var duration = 13.0
     
     override init() {
         voiceover.autoplayLooped = false
