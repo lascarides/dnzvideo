@@ -20,9 +20,9 @@ class Holdings: Section {
         
         section     = VideoSections.Holdings
         voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/03-holdings.m4a"))
-        duration    = 11.076
+        duration    = 34.0
         
-        trigger(action: SKAction.run { self.revealVideo() }, delay: duration - 2)
+        trigger(action: SKAction.run { self.revealVideo() }, delay: 11.0)
 
         for x in 1...16 {
             for y in 1...9 {
@@ -58,9 +58,11 @@ class Holdings: Section {
     }
     
     func revealVideo() {
+        voiceover.removeFromParent()
         let v = VideoPlayer(name: "bryony")
         v.zPosition = 99
         addChild(v)
+        v.start()
         for sq in littleSquares {
             sq.disappear()
         }

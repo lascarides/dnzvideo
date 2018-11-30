@@ -12,7 +12,6 @@ enum VideoSections {
     case Waiting
     case OpeningGallery
     case Intro
-    case PastPresent
     case Holdings
     case BryonyVideo
     case ContentPartners
@@ -36,9 +35,8 @@ class DNZPresentationVideo: SKNode {
     
     let sections = [
         VideoSections.OpeningGallery,
-//        VideoSections.Intro,
-//        VideoSections.Holdings,
-//        VideoSections.BryonyVideo,
+        VideoSections.Intro,
+        VideoSections.Holdings,
         VideoSections.ContentPartners,
         VideoSections.DigitalNZOrg,
         VideoSections.TinaVideo,
@@ -72,12 +70,13 @@ class DNZPresentationVideo: SKNode {
     }
 
     func play() {
-        
+
         addChild(backgroundMusic)
         
         // Get music clip on beat
         let wait = SKAction.wait(forDuration: Settings.musicStartDelay)
         let runner = SKAction.run {
+            NSCursor.setHiddenUntilMouseMoves(true)
             self.currentSection.start()
         }
         let seq = SKAction.sequence([wait, runner])
@@ -91,7 +90,7 @@ class DNZPresentationVideo: SKNode {
     
     func lowerBackgroundMusicVolume() {
         if (bgMusicLoud) {
-            backgroundMusic.run(SKAction.changeVolume(to: 0.1, duration: 1.0))
+            backgroundMusic.run(SKAction.changeVolume(to: 0.05, duration: 1.5))
             bgMusicLoud = false
         }
     }
@@ -129,9 +128,9 @@ class DNZPresentationVideo: SKNode {
         case .OpeningGallery:
             break
         case .Intro:
-            sectionPlay(Intro())
-        case .PastPresent:
-            sectionPlay(PastPresent())
+            let intro = Intro()
+            sectionPlay(intro)
+            intro.cameraSetup()
         case .Holdings:
             sectionPlay(Holdings())
         case .ContentPartners:
@@ -143,9 +142,11 @@ class DNZPresentationVideo: SKNode {
         case .Stories:
             sectionPlay(Stories())
         case .API:
-            sectionPlay(API())
+            let api = API(magicHat: magicHat)
+            sectionPlay(api)
+            api.resumeHat()
         case .Supplejack:
-            sectionPlay(Supplejack())
+            sectionPlay(Supplejack(magicHat: magicHat))
         case .Outro:
             sectionPlay(Outro())
         case .BryonyVideo:
@@ -157,12 +158,14 @@ class DNZPresentationVideo: SKNode {
         case .TinaVideo:
             let v = VideoPlayer(name: "tina")
             addChild(v)
+            (self.scene! as! GameScene).cam.recenter()
             currentSection = v
             v.start()
         case .OliviaVideo:
             let v = VideoPlayer(name: "olivia")
             v.section = .OliviaVideo
             addChild(v)
+            (self.scene! as! GameScene).cam.recenter()
             currentSection = v
             v.start()
         default:

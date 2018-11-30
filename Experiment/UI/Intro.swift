@@ -15,20 +15,42 @@ class Intro: Section {
     let share       = Widget(type: .Share)
     let use         = Widget(type: .Use)
     let logo        = SKSpriteNode(texture: SKTexture(imageNamed: "\(Settings.homePath)/logo.png"))
+    let logoBox     = SKSpriteNode(color: Colour.red, size: CGSize(width: Screen.xPct(pct: 0.5) - 20, height: Screen.yPct(pct: 0.6) - 20))
+    let natlibBox   = SKSpriteNode(color: Colour.sky, size: CGSize(width: Screen.xPct(pct: 0.5) - 20, height: Screen.yPct(pct: 0.6) - 20))
+    let findBox     = SKSpriteNode(color: Colour.straw, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
+    let shareBox     = SKSpriteNode(color: Colour.warmGray, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
+    let useBox     = SKSpriteNode(color: Colour.yello, size: CGSize(width: (Screen.width * 0.33) - 20, height: (Screen.height * 0.4) - 20))
 
     override init() {
         
         super.init()
 
-        natlib.position = CGPoint(x: Screen.xPctCentered(pct: 0.7), y: Screen.yPctCentered(pct: 0.56))
-        find.position   = CGPoint(x: Screen.xPctCentered(pct: 0.25), y: Screen.yPctCentered(pct: 0.25))
-        share.position  = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.25))
-        use.position    = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.25))
+        natlib.position = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.66))
+        find.position   = CGPoint(x: Screen.xPctCentered(pct: 0.1667), y: Screen.yPctCentered(pct: 0.2))
+        share.position  = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.2))
+        use.position    = CGPoint(x: Screen.xPctCentered(pct: 0.8333), y: Screen.yPctCentered(pct: 0.2))
 
+        logo.position = CGPoint(x: Screen.xPctCentered(pct: 0.25), y: Screen.yPctCentered(pct: 0.7))
         logo.zPosition = 1000
-        logo.setScale(0.7)
+        logo.setScale(0.35)
         
         natlib.setScale(1.3)
+
+        find.setScale(1.2)
+        share.setScale(1.2)
+        use.setScale(1.2)
+
+        logoBox.position    = CGPoint(x: Screen.xPctCentered(pct: 0.25), y: Screen.yPctCentered(pct: 0.7))
+        natlibBox.position  = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.7))
+        findBox.position    = CGPoint(x: Screen.xPctCentered(pct: 0.1667), y: Screen.yPctCentered(pct: 0.2))
+        shareBox.position   = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.2))
+        useBox.position     = CGPoint(x: Screen.xPctCentered(pct: 0.8333), y: Screen.yPctCentered(pct: 0.2))
+        
+        addChild(logoBox)
+        addChild(natlibBox)
+        addChild(findBox)
+        addChild(shareBox)
+        addChild(useBox)
 
         addChild(logo)
         addChild(natlib)
@@ -36,7 +58,7 @@ class Intro: Section {
         addChild(share)
         addChild(use)
 
-        trigger(action: SKAction.run { self.logoMover() }, delay: 2.0)
+        trigger(action: SKAction.run { self.logoMover(); }, delay: 2.0)
         trigger(action: SKAction.run { self.natlib.reveal() }, delay: 4.776)
         trigger(action: SKAction.run { self.find.reveal() }, delay: 8.829)
         trigger(action: SKAction.run { self.share.reveal() }, delay: 9.162)
@@ -48,12 +70,13 @@ class Intro: Section {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func cameraSetup() {
+        (self.scene! as! GameScene).cam.position = logo.position
+        (self.scene! as! GameScene).cam.setScale(0.5)
+    }
+    
     func logoMover() {
-        let newLogoPos = CGPoint(x: Screen.xPctCentered(pct: 0.3), y: Screen.yPctCentered(pct: 0.6))
-        let mover = SKEase.move(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.0, from: logo.position, to: newLogoPos)
-        let scaler = SKEase.scale(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.0, from: logo.xScale, to: 0.35)
-        let grp = SKAction.group([mover, scaler])
-        logo.run(grp)
+        (self.scene! as! GameScene).cam.modeSwitchWithTransition(scale: 1.0, centerPoint: CGPoint(x: 0, y: 0))
     }
 
 }

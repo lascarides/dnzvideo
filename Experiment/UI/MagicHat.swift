@@ -13,6 +13,8 @@ class MagicHat: Section {
     var contentPartners = [ContentPartnerWidget]()
     let hatMatte = SKSpriteNode(color: Colour.dark, size: CGSize(width: Screen.width * 0.5, height: Screen.height * 1.4))
     let logo = Widget(type: .MagicHat)
+    let supplejack = SupplejackLogo()
+    let dnzVideo = VideoPlayer(name: "screencast-0-home-whina")
     var widgets = [Widget]()
 
     override init() {
@@ -28,19 +30,19 @@ class MagicHat: Section {
             contentPartners.append(widget)
         }
 
-        var offsetX: CGFloat = 0.65
+        var offsetX: CGFloat = 0.7
         var offsetY: CGFloat = 0.2
-        for category in [WidgetTypes.Gallery, WidgetTypes.Library, WidgetTypes.Archive, WidgetTypes.Museum, WidgetTypes.Media, WidgetTypes.Govt] {
+        for category in [WidgetTypes.Media, WidgetTypes.Govt, WidgetTypes.Gallery, WidgetTypes.Library, WidgetTypes.Archive, WidgetTypes.Museum] {
             let widget = Widget(type: category)
             let pX = Screen.xPctCentered(pct: offsetX)
-            let pY = Screen.xPctCentered(pct: offsetY)
+            let pY = Screen.yPctCentered(pct: offsetY)
             widget.position = CGPoint(x: pX, y: pY)
             widget.zPosition = 1000
-            offsetY += 0.1
-            if offsetX == 0.65 {
-                offsetX = 0.85
+            if offsetX == 0.7 {
+                offsetX = 0.9
             } else {
-                offsetX = 0.65
+                offsetY += 0.3
+                offsetX = 0.7
             }
             addChild(widget)
             widgets.append(widget)
@@ -77,7 +79,17 @@ class MagicHat: Section {
         logo.position = hatMatte.position
         logo.zPosition = 1000
         addChild(logo)
-
+        
+        supplejack.position = logo.position
+        supplejack.position.y = Screen.yPctCentered(pct: 0.2)
+        addChild(supplejack)
+        
+        dnzVideo.position = CGPoint(x: Screen.xPctCentered(pct: 1.5), y: 0)
+        dnzVideo.zPosition = 1000
+        dnzVideo.alpha = 0
+        dnzVideo.resize(to: CGSize(width: 200, height: 200 / Screen.aspectRatio() ))
+        addChild(dnzVideo)
+        
         trigger(action: SKAction.run{ self.shiftToHarvest() }, delay: Settings.musicBeat * 2)
         trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: Settings.musicBeat * 4
         )
@@ -104,12 +116,18 @@ class MagicHat: Section {
     }
 
     func shiftToMagicHat() {
-        var dest = logo.position
-        dest.x = Screen.xPctCentered(pct: 1.75)
-        logo.emitItems(destination: dest)
+        logo.emitItems(destination: dnzVideo.position)
+        let fader = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 1.0, fromValue: 0, toValue: 1)
+        dnzVideo.run(fader)
         (self.scene! as! GameScene).cam.modeSwitchWithTransition(scale: 1.0, centerPoint: logo.position)
     }
-
+    
+    func shiftToWebsite() {
+        let scale = CGFloat(200) / Screen.width
+        (self.scene! as! GameScene).cam.modeSwitchWithTransition(scale: scale, centerPoint: dnzVideo.position)
+        dnzVideo.start()
+    }
+    
     private func contentPartnerList() -> [String] {
         let partners = [
             "95bFM",

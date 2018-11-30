@@ -41,7 +41,6 @@
 		D483860221AE35700033D3E5 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860121AE35700033D3E5 /* Section.swift */; };
 		D483860421AE8DD90033D3E5 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860321AE8DD90033D3E5 /* Intro.swift */; };
 		D483860621AE93EB0033D3E5 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860521AE93EB0033D3E5 /* Widget.swift */; };
-		D483860821AE9B3F0033D3E5 /* PastPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860721AE9B3F0033D3E5 /* PastPresent.swift */; };
 		D483860A21AE9D120033D3E5 /* Holdings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860921AE9D120033D3E5 /* Holdings.swift */; };
 		D483860E21AE9DE80033D3E5 /* DigitalNZOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860D21AE9DE80033D3E5 /* DigitalNZOrg.swift */; };
 		D483861021AEA1470033D3E5 /* Reliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483860F21AEA1470033D3E5 /* Reliable.swift */; };
@@ -55,6 +54,7 @@
 		D483862021AF9D1F0033D3E5 /* MagicHatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483861F21AF9D1F0033D3E5 /* MagicHatItem.swift */; };
 		D483862221AFD8D70033D3E5 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862121AFD8D70033D3E5 /* Camera.swift */; };
 		D483862821B087F50033D3E5 /* MagicHat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862721B087F50033D3E5 /* MagicHat.swift */; };
+		D483862A21B0CFCB0033D3E5 /* SupplejackLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862921B0CFCB0033D3E5 /* SupplejackLogo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,7 +116,6 @@
 		D483860121AE35700033D3E5 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		D483860321AE8DD90033D3E5 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		D483860521AE93EB0033D3E5 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
-		D483860721AE9B3F0033D3E5 /* PastPresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastPresent.swift; sourceTree = "<group>"; };
 		D483860921AE9D120033D3E5 /* Holdings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holdings.swift; sourceTree = "<group>"; };
 		D483860D21AE9DE80033D3E5 /* DigitalNZOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalNZOrg.swift; sourceTree = "<group>"; };
 		D483860F21AEA1470033D3E5 /* Reliable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reliable.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		D483861F21AF9D1F0033D3E5 /* MagicHatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHatItem.swift; sourceTree = "<group>"; };
 		D483862121AFD8D70033D3E5 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		D483862721B087F50033D3E5 /* MagicHat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicHat.swift; sourceTree = "<group>"; };
+		D483862921B0CFCB0033D3E5 /* SupplejackLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplejackLogo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,13 +239,12 @@
 		D458F8EB203663EE00D2BB6A /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D483862721B087F50033D3E5 /* MagicHat.swift */,
 				D48385F321ABE8960033D3E5 /* DNZPresentationVideo.swift */,
 				D48385F721ACAC710033D3E5 /* OpeningGallery.swift */,
 				D48385F921ACAEC50033D3E5 /* VideoPlayer.swift */,
 				D483860121AE35700033D3E5 /* Section.swift */,
 				D483860321AE8DD90033D3E5 /* Intro.swift */,
-				D483860721AE9B3F0033D3E5 /* PastPresent.swift */,
+				D483862721B087F50033D3E5 /* MagicHat.swift */,
 				D483860921AE9D120033D3E5 /* Holdings.swift */,
 				D483860D21AE9DE80033D3E5 /* DigitalNZOrg.swift */,
 				D483860F21AEA1470033D3E5 /* Reliable.swift */,
@@ -282,6 +281,7 @@
 				D483861B21AF6FCA0033D3E5 /* ContentPartnerWidget.swift */,
 				D483861D21AF70070033D3E5 /* TextBox.swift */,
 				D483861F21AF9D1F0033D3E5 /* MagicHatItem.swift */,
+				D483862921B0CFCB0033D3E5 /* SupplejackLogo.swift */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -441,12 +441,12 @@
 				D458F8E42036623600D2BB6A /* NLNZSite.swift in Sources */,
 				D483860421AE8DD90033D3E5 /* Intro.swift in Sources */,
 				D458F8F920522C6400D2BB6A /* Wall.swift in Sources */,
+				D483862A21B0CFCB0033D3E5 /* SupplejackLogo.swift in Sources */,
 				D458F8B82024160500D2BB6A /* ViewController.swift in Sources */,
 				D458F8ED2036641700D2BB6A /* CollectionBrowser.swift in Sources */,
 				D483861A21AF3C400033D3E5 /* LittleSquare.swift in Sources */,
 				D48385F421ABE8960033D3E5 /* DNZPresentationVideo.swift in Sources */,
 				D483861021AEA1470033D3E5 /* Reliable.swift in Sources */,
-				D483860821AE9B3F0033D3E5 /* PastPresent.swift in Sources */,
 				D483861E21AF70070033D3E5 /* TextBox.swift in Sources */,
 				D483861821AEA2830033D3E5 /* Outro.swift in Sources */,
 				D483862221AFD8D70033D3E5 /* Camera.swift in Sources */,

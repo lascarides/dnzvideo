@@ -14,9 +14,10 @@ class Section: SKNode, Advanceable {
     var section = VideoSections.Intro
     var voiceover = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/01-find-share-use.m4a"))
     var matte = SKSpriteNode(color: Colour.dark, size: Screen.cgSize())
-    var duration = 19.621
+    var duration = 11.540
     
     override init() {
+        voiceover.autoplayLooped = false
         super.init()
         addChild(matte)
     }
@@ -33,7 +34,7 @@ class Section: SKNode, Advanceable {
         let longWait = SKAction.wait(forDuration: duration)
         let ender = SKAction.run {
             self.completed = true
-            self.removeAllChildren()
+            self.voiceover.removeFromParent()
             self.removeFromParent()
         }
         let seq = SKAction.sequence([shortWait, player, longWait, ender])

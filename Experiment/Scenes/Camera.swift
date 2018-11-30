@@ -19,10 +19,14 @@ class Camera: SKCameraNode {
     }
     
     func modeSwitchWithTransition(scale: CGFloat, centerPoint: CGPoint) {
-        let scaleAction = SKEase.scale(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 1.0, from: self.xScale, to: scale)
-        let moveAction = SKEase.move(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 1.0, from: self.position, to: centerPoint)
+        let scaleAction = SKEase.scale(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.0, from: self.xScale, to: scale)
+        let moveAction = SKEase.move(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.0, from: self.position, to: centerPoint)
         let actions = SKAction.group([scaleAction, moveAction])
         self.run(actions)
+    }
+    
+    func recenter() {
+        self.position = CGPoint(x: 0, y: 0)
     }
     
 }

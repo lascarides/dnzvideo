@@ -92,18 +92,18 @@ class Widget: SKNode {
             icon = loadIcon(name: "natlib.png")
             matte.fillColor = Colour.clear
             label.removeFromParent()
-            icon.position = CGPoint(x: 0, y: 0)
             icon.setScale(0.5)
         case .MagicHat:
             matte.fillColor = Colour.dark
             icon = SKSpriteNode(texture: SKTexture(imageNamed: "\(Settings.homePath)/logo-only.png"))
             icon.size = matte.frame.size
-            icon.position = CGPoint(x: 0, y: 0)
-            matte.position = CGPoint(x: 0, y: 0)
             label.removeFromParent()
         }
+        
+        if type != .MagicHat && type != .Natlib {
+            icon.position = CGPoint(x: 0, y: 30)
+        }
 
-        icon.position = CGPoint(x: 0, y: 30)
         addChild(icon)
 
     }
@@ -128,7 +128,7 @@ class Widget: SKNode {
     }
     
     func takeALittleTrip(destination: CGPoint) {
-        let follo = SKAction.move(to: destination, duration: 3.0)
+        let follo = SKAction.move(to: destination, duration: 4.0)
         let bye = SKAction.run {
             self.removeFromParent()
         }
@@ -137,7 +137,7 @@ class Widget: SKNode {
     }
     
     func emitItems(destination: CGPoint) {
-        let delay = (self.type == .MagicHat) ? 0.25 : 0.4
+        let delay = (self.type == .MagicHat) ? 0.4 : 0.4
         let wait = SKAction.wait(forDuration: delay)
         let emitter = SKAction.run {
             var emittedType = self.type

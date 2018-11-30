@@ -10,7 +10,7 @@ import SpriteKit
 
 class Supplejack: Section {
     
-    override init() {
+    init(magicHat: MagicHat) {
         
         super.init()
         
