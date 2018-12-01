@@ -9,16 +9,11 @@
 import SpriteKit
 
 enum VideoSections {
-    case Waiting
     case OpeningGallery
     case Intro
     case Holdings
-    case BryonyVideo
     case ContentPartners
-    case DigitalNZOrg
-    case Reliable
     case Stories
-    case Supplejack
     case API
     case TinaVideo
     case OliviaVideo
@@ -35,12 +30,12 @@ class DNZPresentationVideo: SKNode {
     
     let sections = [
         VideoSections.OpeningGallery,
-        VideoSections.Intro,
-        VideoSections.Holdings,
+//        VideoSections.Intro,
+//        VideoSections.Holdings,
         VideoSections.ContentPartners,
-        VideoSections.TinaVideo,
-        VideoSections.Stories,
-        VideoSections.OliviaVideo,
+//        VideoSections.TinaVideo,
+//        VideoSections.Stories,
+//        VideoSections.OliviaVideo,
         VideoSections.API,
         VideoSections.Outro
     ]
@@ -121,6 +116,7 @@ class DNZPresentationVideo: SKNode {
     }
     
     private func changeStatus(_ status: VideoSections) {
+        (currentSection as! SKNode).removeFromParent()
         switch status {
         case .OpeningGallery:
             break
@@ -132,34 +128,22 @@ class DNZPresentationVideo: SKNode {
             sectionPlay(Holdings())
         case .ContentPartners:
             sectionPlay(magicHat)
-        case .DigitalNZOrg:
-            sectionPlay(DigitalNZOrg())
-        case .Reliable:
-            sectionPlay(Reliable(magicHat: magicHat))
         case .Stories:
             sectionPlay(Stories())
         case .API:
             let api = API(magicHat: magicHat)
             sectionPlay(api)
             api.resumeHat()
-        case .Supplejack:
-            sectionPlay(Supplejack(magicHat: magicHat))
         case .Outro:
             sectionPlay(Outro())
-        case .BryonyVideo:
-            let v = VideoPlayer(name: "bryony")
-            v.section = .BryonyVideo
-            addChild(v)
-            currentSection = v
-            v.start()
         case .TinaVideo:
-            let v = VideoPlayer(name: "tina")
+            let v = VideoPlayer(name: "tina", duration: 32.916)
             addChild(v)
             (self.scene! as! GameScene).cam.recenter()
             currentSection = v
             v.start()
         case .OliviaVideo:
-            let v = VideoPlayer(name: "olivia")
+            let v = VideoPlayer(name: "olivia", duration: 11.170)
             v.section = .OliviaVideo
             addChild(v)
             (self.scene! as! GameScene).cam.recenter()

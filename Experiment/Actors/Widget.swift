@@ -70,7 +70,7 @@ class Widget: SKNode {
             matte.fillColor = Colour.yello
             label.text = "Galleries"
         case .Library:
-            icon = loadIcon(name: "library.png")
+            icon = loadIcon(name: "book.png")
             matte.fillColor = Colour.red
             label.text = "Libraries"
         case .Media:

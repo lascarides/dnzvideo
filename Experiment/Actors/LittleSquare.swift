@@ -109,7 +109,7 @@ class LittleSquare: SKNode {
     func addVideo() {
         let cropNode = SKCropNode()
         cropNode.maskNode = SKSpriteNode(color: Colour.deepBlue, size: CGSize(width: gridW * 3, height: gridH * 3))
-        videoNode = VideoPlayer(name: "tractorparade")
+        videoNode = VideoPlayer(name: "tractorparade", duration: 1000)
         imageNode!.resize(to: CGSize(width: gridW * 3, height: gridH * 3))
         videoNode!.resize(to: imageNode!.maskNode!.frame.size)
         videoNode!.alpha = 0
@@ -119,6 +119,7 @@ class LittleSquare: SKNode {
     }
     
     func playVideo() {
+        addVideo()
         let fadein = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeOut, time: 0.75, fromValue: 0.0, toValue: 1)
         videoNode?.run(fadein)
         videoNode?.start()
@@ -130,6 +131,7 @@ class LittleSquare: SKNode {
             "find.png",
             "gallery.png",
             "govt.png",
+            "book.png",
             "library.png",
             "media.png",
             "museum.png",

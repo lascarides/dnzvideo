@@ -15,22 +15,9 @@ class Stories: Section {
         super.init()
         
         section     = VideoSections.Stories
-        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/07-stories.m4a"))
-        duration    = 10.658
+        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/04-links-and-stories.m4a"))
+        duration    = 26.535
         
-        //        natlib.position = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.6))
-        //        find.position   = CGPoint(x: Screen.xPctCentered(pct: 0.25), y: Screen.yPctCentered(pct: 0.25))
-        //        share.position  = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.25))
-        //        use.position    = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.25))
-        //
-        //        addChild(natlib)
-        //        addChild(find)
-        //        addChild(share)
-        //        addChild(use)
-        //
-        //        trigger(action: SKAction.run { self.natlib.reveal() }, delay: 4.776)
-        //        trigger(action: SKAction.run { self.find.reveal() }, delay: 8.829)
-        //        trigger(action: SKAction.run { self.share.reveal() }, delay: 9.162)
         //        trigger(action: SKAction.run { self.use.reveal() }, delay: 9.809)
         
     }

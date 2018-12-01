@@ -17,13 +17,16 @@ class VideoPlayer: SKVideoNode, Advanceable {
 
     let nameLabel = TextBox(text: "TINA MAKERETI")
     let descriptiveLabel = TextBox(text: "Author")
+    
+    var soundtrack: SKAudioNode?
 
-    init(name: String) {
+    init(name: String, duration: Double) {
         let vidURL = URL(fileURLWithPath: "\(Settings.homePath)/video/\(name).mov")
         let video = AVPlayerItem(url: vidURL)
         player = AVPlayer(playerItem: video)
+        player.volume = 0
         super.init(avPlayer: player)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: video)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: video)
         
         // Ensure initial size of node is set to video dimensions
         let track = AVURLAsset(url: vidURL).tracks(withMediaType: AVMediaType.video).first
@@ -35,6 +38,17 @@ class VideoPlayer: SKVideoNode, Advanceable {
         
         // Use labels, if necessary
         setUpLabels(name: name)
+        
+        // Add soundtrack, if necessary
+        if (name == "tina" || name == "olivia" || name == "bryony") {
+            soundtrack = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/\(name).m4a"))
+            let fader = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeIn, time: 1.0, fromValue: 1.0, toValue: 0)
+            trigger(action: fader, delay: duration - 1)
+        }
+
+        // Set timings
+        trigger(action: SKAction.run { self.finished() }, delay: duration)
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,10 +57,17 @@ class VideoPlayer: SKVideoNode, Advanceable {
     
     func start() {
         player.play()
+        if soundtrack != nil {
+            addChild(soundtrack!)
+        }
     }
     
-    @objc private func playerDidFinishPlaying(note: NSNotification) {
+//    @objc private func playerDidFinishPlaying(note: NSNotification) {
+    func finished() {
+        print("done")
         completed = true
+        soundtrack?.removeFromParent()
+        soundtrack = nil
         removeFromParent()
     }
  
@@ -64,6 +85,12 @@ class VideoPlayer: SKVideoNode, Advanceable {
         }
     }
     
+    func trigger(action: SKAction, delay: TimeInterval) {
+        let timedWait = SKAction.wait(forDuration: delay)
+        let seq = SKAction.sequence([timedWait, action])
+        self.run(seq)
+    }
+
     private func setUpLabels(name: String) {
         if (name != "tina" && name != "olivia" && name != "bryony") {
             return

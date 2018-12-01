@@ -19,8 +19,8 @@ class API: Section {
         super.init()
         
         section     = VideoSections.API
-        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/08-API.m4a"))
-        duration    = 21.525
+        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/05-api.m4a"))
+        duration    = 41.052
 
         //        trigger(action: SKAction.run { self.use.reveal() }, delay: 9.809)
         

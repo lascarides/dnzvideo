@@ -15,8 +15,8 @@ class Outro: Section {
         super.init()
         
         section     = VideoSections.Outro
-        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/10-outro.m4a"))
-        duration    = 12.376
+        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/06-outro.m4a"))
+        duration    = 17.171
 
     }
     

@@ -25,12 +25,12 @@ class OpeningGallery: SKNode, Advanceable {
         Colour.clear,
         Colour.clear,
         Colour.clear,
-        Colour.yello, // 4.jpg
+        Colour.white, // 4.jpg
         Colour.sky,
         Colour.white,
         Colour.red,
         Colour.deepBlue, // 8.jpg
-        Colour.dark,
+        Colour.yello,
         Colour.gold,
         Colour.white,
         Colour.sky,
@@ -86,10 +86,10 @@ class OpeningGallery: SKNode, Advanceable {
         // 1 beat measures
         let wha = SKAction.sequence([show, wait, advance])
         let seq = SKAction.sequence([
-//            SKAction.repeat(tahi, count: 4),
+            SKAction.repeat(tahi, count: 4),
 //            SKAction.repeat(rua, count: 6),
 //            SKAction.repeat(toru, count: 4),
-            SKAction.repeat(wha, count: 8),
+//            SKAction.repeat(wha, count: 7),
             SKAction.run {
                 self.completed = true
                 self.removeFromParent()

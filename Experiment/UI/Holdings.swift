@@ -19,10 +19,10 @@ class Holdings: Section {
         super.init()
         
         section     = VideoSections.Holdings
-        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/03-holdings.m4a"))
-        duration    = 34.0
+        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/02-holdings.m4a"))
+        duration    = 12.639 + 22.5
         
-        trigger(action: SKAction.run { self.revealVideo() }, delay: 11.0)
+        trigger(action: SKAction.run { self.revealVideo() }, delay: 12.639)
 
         for x in 1...16 {
             for y in 1...9 {
@@ -44,12 +44,12 @@ class Holdings: Section {
             sq.reveal()
         }
 
-        trigger(action: SKAction.run { self.contentTypes["books"]!.revealImageNode() }, delay: 3.397)
-        trigger(action: SKAction.run { self.contentTypes["news"]!.revealImageNode() }, delay: 7.551)
-        trigger(action: SKAction.run { self.contentTypes["archives"]!.revealImageNode() }, delay: 6.547)
-        trigger(action: SKAction.run { self.contentTypes["video"]!.playVideo() }, delay: 5.597)
-        trigger(action: SKAction.run { self.contentTypes["audio"]!.revealImageNode() }, delay: 4.556)
-        trigger(action: SKAction.run { self.contentTypes["images"]!.revealImageNode() }, delay: 3.917)
+        trigger(action: SKAction.run { self.contentTypes["books"]!.revealImageNode() }, delay: 3.837)
+        trigger(action: SKAction.run { self.contentTypes["news"]!.revealImageNode() }, delay: 8.631)
+        trigger(action: SKAction.run { self.contentTypes["archives"]!.revealImageNode() }, delay: 7.865)
+        trigger(action: SKAction.run { self.contentTypes["video"]!.playVideo() }, delay: 7.021)
+        trigger(action: SKAction.run { self.contentTypes["audio"]!.revealImageNode() }, delay: 5.548)
+        trigger(action: SKAction.run { self.contentTypes["images"]!.revealImageNode() }, delay: 4.585)
         
     }
     
@@ -59,7 +59,7 @@ class Holdings: Section {
     
     func revealVideo() {
         voiceover.removeFromParent()
-        let v = VideoPlayer(name: "bryony")
+        let v = VideoPlayer(name: "bryony", duration: 22.190)
         v.zPosition = 99
         addChild(v)
         v.start()
@@ -71,9 +71,6 @@ class Holdings: Section {
     private func addContentFeature(index: Int, name: String) {
         contentTypes[name] = littleSquares[index]
         contentTypes[name]!.addImageNode(name: "holdings/\(name).jpg")
-        if name == "video" {
-            contentTypes[name]!.addVideo()
-        }
     }
 
     

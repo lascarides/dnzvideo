@@ -12,14 +12,11 @@ class Section: SKNode, Advanceable {
     
     var completed = false
     var section = VideoSections.Intro
-    var voiceover = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/01-find-share-use.m4a"))
-    var matte = SKSpriteNode(color: Colour.dark, size: Screen.cgSize())
-    var duration = 13.0
+    var voiceover = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/01-intro.m4a"))
+    var duration = 1.0
     
     override init() {
-        voiceover.autoplayLooped = false
         super.init()
-        addChild(matte)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +24,6 @@ class Section: SKNode, Advanceable {
     }
 
     func start() {
-        let shortWait = SKAction.wait(forDuration: Settings.musicBeat * 0.5)
         let player = SKAction.run {
             self.addChild(self.voiceover)
         }
@@ -37,14 +33,13 @@ class Section: SKNode, Advanceable {
             self.voiceover.removeFromParent()
             self.removeFromParent()
         }
-        let seq = SKAction.sequence([shortWait, player, longWait, ender])
+        let seq = SKAction.sequence([player, longWait, ender])
         run(seq)
     }
  
     func trigger(action: SKAction, delay: TimeInterval) {
-        let shortWait = SKAction.wait(forDuration: Settings.musicBeat * 0.5)
         let timedWait = SKAction.wait(forDuration: delay)
-        let seq = SKAction.sequence([shortWait, timedWait, action])
+        let seq = SKAction.sequence([timedWait, action])
         self.run(seq)
     }
     

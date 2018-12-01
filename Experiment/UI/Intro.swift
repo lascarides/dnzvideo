@@ -25,6 +25,8 @@ class Intro: Section {
         
         super.init()
 
+        duration = 14.1
+        
         natlib.position = CGPoint(x: Screen.xPctCentered(pct: 0.75), y: Screen.yPctCentered(pct: 0.7))
         find.position   = CGPoint(x: Screen.xPctCentered(pct: 0.1667), y: Screen.yPctCentered(pct: 0.2))
         share.position  = CGPoint(x: Screen.xPctCentered(pct: 0.5), y: Screen.yPctCentered(pct: 0.2))
@@ -58,11 +60,11 @@ class Intro: Section {
         addChild(share)
         addChild(use)
 
-        trigger(action: SKAction.run { self.logoMover(); }, delay: 2.0)
-        trigger(action: SKAction.run { self.natlib.reveal() }, delay: 4.776)
-        trigger(action: SKAction.run { self.find.reveal() }, delay: 8.829)
-        trigger(action: SKAction.run { self.share.reveal() }, delay: 9.162)
-        trigger(action: SKAction.run { self.use.reveal() }, delay: 9.809)
+        trigger(action: SKAction.run { self.logoMover(); }, delay: 3.5)
+        trigger(action: SKAction.run { self.natlib.reveal() }, delay: 7.0)
+        trigger(action: SKAction.run { self.find.reveal() }, delay: 10.5)
+        trigger(action: SKAction.run { self.share.reveal() }, delay: 11.5)
+        trigger(action: SKAction.run { self.use.reveal() }, delay: 12.5)
 
     }
     

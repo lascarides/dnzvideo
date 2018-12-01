@@ -71,5 +71,7 @@ class GameScene: SKScene {
         
         vid.checkForAdvance()
         
+        print(vid.currentSection.section)
+        
     }
 }

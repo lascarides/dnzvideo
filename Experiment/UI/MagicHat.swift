@@ -11,10 +11,9 @@ import SpriteKit
 class MagicHat: Section {
     
     var contentPartners = [ContentPartnerWidget]()
-    let hatMatte = SKSpriteNode(color: Colour.dark, size: CGSize(width: Screen.width * 0.5, height: Screen.height * 1.4))
     let logo = Widget(type: .MagicHat)
     let supplejack = SupplejackLogo()
-    let dnzVideo = VideoPlayer(name: "screencast-0-home-whina")
+    let dnzVideo = VideoPlayer(name: "screencast-0-home-whina", duration: 1000.0)
     var widgets = [Widget]()
 
     override init() {
@@ -22,8 +21,8 @@ class MagicHat: Section {
         super.init()
         
         section     = VideoSections.ContentPartners
-        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/04-content-partners.m4a"))
-        duration    = 25.0
+        voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/03-magic-hat-1.m4a"))
+        duration    = 37.99
         
         for partner in contentPartnerList() {
             let widget = ContentPartnerWidget(partner: partner)
@@ -48,6 +47,12 @@ class MagicHat: Section {
             widgets.append(widget)
         }
         
+        
+        // COntent partners wall
+        let partnersCrop = SKCropNode()
+        partnersCrop.maskNode = SKSpriteNode(color: Colour.dark, size: Screen.cgSize())
+        addChild(partnersCrop)
+        
         var xOffset = Screen.xPctCentered(pct: -0.1)
         var yOffset = Screen.yPctCentered(pct: -0.1)
         
@@ -58,7 +63,7 @@ class MagicHat: Section {
             if partner.parent == nil {
                 let xPos = xOffset + (partner.width * 0.5)
                 partner.position = CGPoint(x: xPos, y: yOffset)
-                addChild(partner)
+                partnersCrop.addChild(partner)
                 
                 // Advance as needed, or exit loop
                 xOffset += partner.width
@@ -72,17 +77,15 @@ class MagicHat: Section {
             
         }
         
-        hatMatte.position = CGPoint(x: Screen.xPctCentered(pct: 1.25), y: Screen.yPctCentered(pct: 0.5))
-        hatMatte.zPosition = 999
-        addChild(hatMatte)
-
-        logo.position = hatMatte.position
+        logo.position = CGPoint(x: Screen.xPctCentered(pct: 1.25), y: Screen.yPctCentered(pct: 0.5))
         logo.zPosition = 1000
         addChild(logo)
         
         supplejack.position = logo.position
         supplejack.position.y = Screen.yPctCentered(pct: 0.2)
+        supplejack.zPosition = 1000
         addChild(supplejack)
+        supplejack.emitBits(destination: logo.position)
         
         dnzVideo.position = CGPoint(x: Screen.xPctCentered(pct: 1.5), y: 0)
         dnzVideo.zPosition = 1000
@@ -90,9 +93,9 @@ class MagicHat: Section {
         dnzVideo.resize(to: CGSize(width: 200, height: 200 / Screen.aspectRatio() ))
         addChild(dnzVideo)
         
-        trigger(action: SKAction.run{ self.shiftToHarvest() }, delay: Settings.musicBeat * 2)
-        trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: Settings.musicBeat * 4)
-        trigger(action: SKAction.run{ self.shiftToWebsite() }, delay: Settings.musicBeat * 5)
+        trigger(action: SKAction.run{ self.shiftToHarvest() }, delay: 9.935)
+        trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: 14.088)
+        trigger(action: SKAction.run{ self.shiftToWebsite() }, delay: 20.452)
 
     }
     

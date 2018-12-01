@@ -27,6 +27,7 @@ class Camera: SKCameraNode {
     
     func recenter() {
         self.position = CGPoint(x: 0, y: 0)
+        self.setScale(1.0)
     }
     
 }

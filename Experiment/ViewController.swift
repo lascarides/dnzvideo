@@ -22,8 +22,8 @@ class ViewController: NSViewController {
         // Present the scene
         if let view = self.skView {
             view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
             view.presentScene(experimentScene)
             view.window?.toggleFullScreen(view)
         }
