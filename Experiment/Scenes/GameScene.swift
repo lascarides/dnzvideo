@@ -70,8 +70,6 @@ class GameScene: SKScene {
         self.lastUpdateTime = currentTime
         
         vid.checkForAdvance()
-        
-        print(vid.currentSection.section)
-        
+                
     }
 }

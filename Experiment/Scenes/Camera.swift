@@ -10,8 +10,22 @@ import SpriteKit
 
 class Camera: SKCameraNode {
     
+    let mouse = MousePointer()
+    
     override init() {
         super.init()
+        addChild(mouse)
+
+        // MOUSE TESTS
+//        let wait = SKAction.wait(forDuration: 1.0)
+//        let fadeIn = SKAction.run{ self.mouse.fadeIn() }
+//        let fadeOut = SKAction.run{ self.mouse.fadeOut() }
+//        let move = SKAction.run{ self.mouse.move(to: CGPoint(x: 100, y: 100)) }
+//        let recenter = SKAction.run{ self.mouse.recenter() }
+//        let click = SKAction.run{ self.mouse.click() }
+//        let seq = SKAction.sequence([fadeIn, wait, move, wait, click, wait, recenter, wait, click, wait, fadeOut])
+//        mouse.run(seq)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

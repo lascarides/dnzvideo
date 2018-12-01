@@ -30,12 +30,12 @@ class DNZPresentationVideo: SKNode {
     
     let sections = [
         VideoSections.OpeningGallery,
-//        VideoSections.Intro,
-//        VideoSections.Holdings,
+        VideoSections.Intro,
+        VideoSections.Holdings,
         VideoSections.ContentPartners,
-//        VideoSections.TinaVideo,
-//        VideoSections.Stories,
-//        VideoSections.OliviaVideo,
+        VideoSections.TinaVideo,
+        VideoSections.Stories,
+        VideoSections.OliviaVideo,
         VideoSections.API,
         VideoSections.Outro
     ]
@@ -117,6 +117,7 @@ class DNZPresentationVideo: SKNode {
     
     private func changeStatus(_ status: VideoSections) {
         (currentSection as! SKNode).removeFromParent()
+        (self.scene! as! GameScene).cam.recenter()
         switch status {
         case .OpeningGallery:
             break
@@ -139,7 +140,6 @@ class DNZPresentationVideo: SKNode {
         case .TinaVideo:
             let v = VideoPlayer(name: "tina", duration: 32.916)
             addChild(v)
-            (self.scene! as! GameScene).cam.recenter()
             currentSection = v
             v.start()
         case .OliviaVideo:

@@ -52,6 +52,7 @@
 		D483862221AFD8D70033D3E5 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862121AFD8D70033D3E5 /* Camera.swift */; };
 		D483862821B087F50033D3E5 /* MagicHat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862721B087F50033D3E5 /* MagicHat.swift */; };
 		D483862A21B0CFCB0033D3E5 /* SupplejackLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862921B0CFCB0033D3E5 /* SupplejackLogo.swift */; };
+		D483862C21B30C500033D3E5 /* MousePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D483862B21B30C500033D3E5 /* MousePointer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,7 @@
 		D483862121AFD8D70033D3E5 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		D483862721B087F50033D3E5 /* MagicHat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicHat.swift; sourceTree = "<group>"; };
 		D483862921B0CFCB0033D3E5 /* SupplejackLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplejackLogo.swift; sourceTree = "<group>"; };
+		D483862B21B30C500033D3E5 /* MousePointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MousePointer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 				D483861D21AF70070033D3E5 /* TextBox.swift */,
 				D483861F21AF9D1F0033D3E5 /* MagicHatItem.swift */,
 				D483862921B0CFCB0033D3E5 /* SupplejackLogo.swift */,
+				D483862B21B30C500033D3E5 /* MousePointer.swift */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				D458F8FD20579E1500D2BB6A /* ScreenSize.swift in Sources */,
 				D483860021AE23350033D3E5 /* Colour.swift in Sources */,
 				D458F8E62036624400D2BB6A /* NLNZCollection.swift in Sources */,
+				D483862C21B30C500033D3E5 /* MousePointer.swift in Sources */,
 				D458F8FF2057AABB00D2BB6A /* NLNZSearch.swift in Sources */,
 				D458F8F7203FB9B400D2BB6A /* Actor.swift in Sources */,
 				D48385FC21ACCE6F0033D3E5 /* Easing.swift in Sources */,

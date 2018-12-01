@@ -49,6 +49,11 @@ class VideoPlayer: SKVideoNode, Advanceable {
         // Set timings
         trigger(action: SKAction.run { self.finished() }, delay: duration)
 
+        // Add Tina extras
+        if name == "tina" {
+            trigger(action: SKAction.run { self.tinaExtras() }, delay: 19.5)
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,7 +69,6 @@ class VideoPlayer: SKVideoNode, Advanceable {
     
 //    @objc private func playerDidFinishPlaying(note: NSNotification) {
     func finished() {
-        print("done")
         completed = true
         soundtrack?.removeFromParent()
         soundtrack = nil
@@ -91,6 +95,24 @@ class VideoPlayer: SKVideoNode, Advanceable {
         self.run(seq)
     }
 
+    private func tinaExtras() {
+        let rekohu = SKSpriteNode(texture: SKTexture(imageNamed: "\(Settings.homePath)/rekohu.jpg"), size: Screen.cgSize())
+        rekohu.alpha = 0.0
+        addChild(rekohu)
+        
+        let scaly = SKEase.scale(easeFunction: .curveTypeLinear, easeType: .easeTypeInOut, time: 7.0, from: rekohu.xScale, to: rekohu.xScale * 1.1)
+        rekohu.run(scaly)
+
+        let waiter = SKAction.wait(forDuration: 4.0)
+        let fadeIn = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.0, fromValue: 0, toValue: 1)
+        let fadeOut = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.0, fromValue: 1, toValue: 0)
+        let removal = SKAction.run {
+            rekohu.removeFromParent()
+        }
+        let seq = SKAction.sequence([fadeIn,waiter,fadeOut,removal])
+        rekohu.run(seq)
+    }
+    
     private func setUpLabels(name: String) {
         if (name != "tina" && name != "olivia" && name != "bryony") {
             return
