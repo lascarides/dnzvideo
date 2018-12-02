@@ -237,11 +237,11 @@
 			children = (
 				D48385F321ABE8960033D3E5 /* DNZPresentationVideo.swift */,
 				D48385F721ACAC710033D3E5 /* OpeningGallery.swift */,
-				D48385F921ACAEC50033D3E5 /* VideoPlayer.swift */,
 				D483860121AE35700033D3E5 /* Section.swift */,
 				D483860321AE8DD90033D3E5 /* Intro.swift */,
-				D483862721B087F50033D3E5 /* MagicHat.swift */,
 				D483860921AE9D120033D3E5 /* Holdings.swift */,
+				D483862721B087F50033D3E5 /* MagicHat.swift */,
+				D48385F921ACAEC50033D3E5 /* VideoPlayer.swift */,
 				D483861121AEA1960033D3E5 /* Stories.swift */,
 				D483861321AEA1F10033D3E5 /* API.swift */,
 				D483861721AEA2830033D3E5 /* Outro.swift */,

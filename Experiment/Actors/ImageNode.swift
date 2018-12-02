@@ -31,6 +31,15 @@ class ImageNode: SKCropNode {
         node.setScale(to)
     }
     
+    func changeTexture(name: String) {
+        let url = URL(fileURLWithPath: "\(Settings.homePath)/\(name)")
+        let img = NSImage(byReferencing: url)
+        let texture = SKTexture(image: img)
+        node.texture = texture
+        node.size = texture.size()
+        self.resize(to: Screen.cgSize())
+    }
+    
     func resize(to: CGSize) {
         self.maskNode = SKSpriteNode(color: NSColor.black, size: to)
         let imageAspectRatio = node.size.width / node.size.height

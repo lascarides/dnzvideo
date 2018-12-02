@@ -26,7 +26,7 @@ class OpeningGallery: SKNode, Advanceable {
         Colour.clear,
         Colour.clear,
         Colour.white, // 4.jpg
-        Colour.sky,
+        Colour.yello,
         Colour.white,
         Colour.red,
         Colour.deepBlue, // 8.jpg
@@ -87,9 +87,9 @@ class OpeningGallery: SKNode, Advanceable {
         let wha = SKAction.sequence([show, wait, advance])
         let seq = SKAction.sequence([
             SKAction.repeat(tahi, count: 4),
-//            SKAction.repeat(rua, count: 6),
-//            SKAction.repeat(toru, count: 4),
-//            SKAction.repeat(wha, count: 7),
+            SKAction.repeat(rua, count: 6),
+            SKAction.repeat(toru, count: 4),
+            SKAction.repeat(wha, count: 8),
             SKAction.run {
                 self.completed = true
                 self.removeFromParent()

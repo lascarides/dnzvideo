@@ -18,6 +18,8 @@ class VideoPlayer: SKVideoNode, Advanceable {
     let nameLabel = TextBox(text: "TINA MAKERETI")
     let descriptiveLabel = TextBox(text: "Author")
     
+    let waitForCatchup: TimeInterval = 0.5
+    
     var soundtrack: SKAudioNode?
 
     init(name: String, duration: Double) {
@@ -43,15 +45,16 @@ class VideoPlayer: SKVideoNode, Advanceable {
         if (name == "tina" || name == "olivia" || name == "bryony") {
             soundtrack = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/\(name).m4a"))
             let fader = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeIn, time: 1.0, fromValue: 1.0, toValue: 0)
-            trigger(action: fader, delay: duration - 1)
+            trigger(action: fader, delay: duration + waitForCatchup - 1)
+            trigger(action: SKAction.run { self.finished() }, delay: duration + waitForCatchup)
+        } else {
+            // Set timings
+            trigger(action: SKAction.run { self.finished() }, delay: duration)
         }
-
-        // Set timings
-        trigger(action: SKAction.run { self.finished() }, delay: duration)
 
         // Add Tina extras
         if name == "tina" {
-            trigger(action: SKAction.run { self.tinaExtras() }, delay: 19.5)
+            trigger(action: SKAction.run { self.tinaExtras() }, delay: 19.5 + waitForCatchup)
         }
         
     }
@@ -61,18 +64,23 @@ class VideoPlayer: SKVideoNode, Advanceable {
     }
     
     func start() {
-        player.play()
-        if soundtrack != nil {
-            addChild(soundtrack!)
+        let wait = SKAction.wait(forDuration: waitForCatchup)
+        let starter = SKAction.run {
+            self.player.play()
+            if self.soundtrack != nil {
+                self.addChild(self.soundtrack!)
+            }
         }
+        let seq = SKAction.sequence([wait, starter])
+        run(seq)
     }
     
 //    @objc private func playerDidFinishPlaying(note: NSNotification) {
     func finished() {
-        completed = true
         soundtrack?.removeFromParent()
         soundtrack = nil
         removeFromParent()
+        completed = true
     }
  
     func resize(to newSize: CGSize) {

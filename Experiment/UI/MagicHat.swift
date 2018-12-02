@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+enum MagicHatModes {
+    case MagicHat
+    case API
+}
+
 class MagicHat: Section {
     
     var contentPartners = [ContentPartnerWidget]()
@@ -15,8 +20,12 @@ class MagicHat: Section {
     let supplejack = SupplejackLogo()
     let dnzVideo = VideoPlayer(name: "screencast-0-home-whina", duration: 1000.0)
     var widgets = [Widget]()
+    let apiWidget       = Widget(type: .API)
+    let apiLibrary      = Widget(type: .APILibrary)
+    let apiResearch     = Widget(type: .APIResearch)
+    let apiMobile       = Widget(type: .APIMobile)
 
-    override init() {
+    init(mode: MagicHatModes = .MagicHat) {
         
         super.init()
         
@@ -48,44 +57,40 @@ class MagicHat: Section {
         }
         
         
-        // COntent partners wall
-        let partnersCrop = SKCropNode()
-        partnersCrop.maskNode = SKSpriteNode(color: Colour.dark, size: Screen.cgSize())
-        addChild(partnersCrop)
-        
-        var xOffset = Screen.xPctCentered(pct: -0.1)
-        var yOffset = Screen.yPctCentered(pct: -0.1)
-        
-        while (xOffset < Screen.xPctCentered(pct: 1.1) && yOffset < Screen.yPctCentered(pct: 1.1))  {
+        if mode == .MagicHat {
+            // COntent partners wall
+            let partnersCrop = SKCropNode()
+            partnersCrop.maskNode = SKSpriteNode(color: Colour.dark, size: Screen.cgSize())
+            addChild(partnersCrop)
             
-            let partner = contentPartners.randomElement()!
-
-            if partner.parent == nil {
-                let xPos = xOffset + (partner.width * 0.5)
-                partner.position = CGPoint(x: xPos, y: yOffset)
-                partnersCrop.addChild(partner)
+            var xOffset = Screen.xPctCentered(pct: -0.1)
+            var yOffset = Screen.yPctCentered(pct: -0.1)
+            
+            while (xOffset < Screen.xPctCentered(pct: 1.1) && yOffset < Screen.yPctCentered(pct: 1.1))  {
                 
-                // Advance as needed, or exit loop
-                xOffset += partner.width
-                if xOffset > Screen.xPctCentered(pct: 1.1) {
-                    xOffset = Screen.xPctCentered(pct: -0.1)
-                    yOffset += partner.height
+                let partner = contentPartners.randomElement()!
+                
+                if partner.parent == nil {
+                    let xPos = xOffset + (partner.width * 0.5)
+                    partner.position = CGPoint(x: xPos, y: yOffset)
+                    partnersCrop.addChild(partner)
+                    
+                    // Advance as needed, or exit loop
+                    xOffset += partner.width
+                    if xOffset > Screen.xPctCentered(pct: 1.1) {
+                        xOffset = Screen.xPctCentered(pct: -0.1)
+                        yOffset += partner.height
+                    }
+                    
+                    partner.reveal()
                 }
                 
-                partner.reveal()
             }
-            
         }
         
         logo.position = CGPoint(x: Screen.xPctCentered(pct: 1.25), y: Screen.yPctCentered(pct: 0.5))
         logo.zPosition = 1000
         addChild(logo)
-        
-        supplejack.position = logo.position
-        supplejack.position.y = Screen.yPctCentered(pct: 0.2)
-        supplejack.zPosition = 1000
-        addChild(supplejack)
-        supplejack.emitBits(destination: logo.position)
         
         dnzVideo.position = CGPoint(x: Screen.xPctCentered(pct: 1.5), y: 0)
         dnzVideo.zPosition = 1000
@@ -93,9 +98,11 @@ class MagicHat: Section {
         dnzVideo.resize(to: CGSize(width: 200, height: 200 / Screen.aspectRatio() ))
         addChild(dnzVideo)
         
-        trigger(action: SKAction.run{ self.shiftToHarvest() }, delay: 9.935)
-        trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: 14.088)
-        trigger(action: SKAction.run{ self.shiftToWebsite() }, delay: 20.452)
+        if mode == .MagicHat {
+            trigger(action: SKAction.run{ self.shiftToHarvest() }, delay: 9.935)
+            trigger(action: SKAction.run{ self.shiftToMagicHat() }, delay: 14.088)
+            trigger(action: SKAction.run{ self.shiftToWebsite() }, delay: 20.452)
+        }
 
     }
     
@@ -129,6 +136,57 @@ class MagicHat: Section {
         let scale = CGFloat(200) / Screen.width
         (self.scene! as! GameScene).cam.modeSwitchWithTransition(scale: scale, centerPoint: dnzVideo.position)
         dnzVideo.start()
+    }
+    
+    func shiftToAPI() {
+        var dest = logo.position
+        for partner in contentPartners {
+            partner.fade()
+        }
+        for widget in widgets {
+            widget.position.x += 200
+            if widget.type == WidgetTypes.Archive || widget.type == WidgetTypes.Media || widget.type == WidgetTypes.Gallery  {
+                widget.position.x += 100
+
+            }
+            widget.reveal()
+            dest.x += 10
+            widget.emitItems(destination: dest)
+        }
+        logo.reveal()
+        shiftToMagicHat()
+        apiMobile.position = dnzVideo.position
+        apiMobile.position.x -= 100
+        apiMobile.position.y -= 200
+        apiMobile.zPosition = logo.zPosition + 1
+        addChild(apiMobile)
+        
+        apiLibrary.position = dnzVideo.position
+        apiLibrary.position.x -= 100
+        apiLibrary.position.y += 300
+        apiLibrary.zPosition = logo.zPosition + 1
+        addChild(apiLibrary)
+
+        apiResearch.position = dnzVideo.position
+        apiResearch.position.x += 250
+        apiResearch.position.y += 200
+        apiResearch.zPosition = logo.zPosition + 1
+        addChild(apiResearch)
+        
+        apiWidget.position = logo.position
+        apiWidget.zPosition = logo.zPosition + 1
+        addChild(apiWidget)
+    }
+
+    func shiftToSupplejack() {
+        supplejack.position = logo.position
+        supplejack.position.y -= 300
+        supplejack.zPosition = logo.zPosition
+        let fader = SKEase.fade(easeFunction: .curveTypeExpo, easeType: .easeTypeIn, time: 1.0, fromValue: 0, toValue: 1)
+        addChild(supplejack)
+        supplejack.run(fader)
+        (self.scene! as! GameScene).cam.modeSwitchWithTransition(scale: 0.8, centerPoint: supplejack.position)
+        supplejack.emitBits(destination: logo.position)
     }
     
     private func contentPartnerList() -> [String] {

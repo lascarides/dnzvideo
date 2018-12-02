@@ -43,8 +43,6 @@ class DNZPresentationVideo: SKNode {
     let backgroundMusic = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/bg.m4a"))
     var bgMusicLoud = true
     var currentSection: Advanceable! = OpeningGallery()
-
-    let magicHat = MagicHat()
     
     var status: VideoSections = .OpeningGallery {
         didSet {
@@ -89,8 +87,15 @@ class DNZPresentationVideo: SKNode {
     
     func raiseBackgroundMusicVolume() {
         if (bgMusicLoud == false) {
-            backgroundMusic.run(SKAction.changeVolume(to: 1.0, duration: 1.0))
+            backgroundMusic.run(SKAction.changeVolume(to: 1.0, duration: 3.0))
             bgMusicLoud = true
+        }
+    }
+    
+    func slowFadeBackgroundMusicVolume() {
+        if (bgMusicLoud) {
+            backgroundMusic.run(SKAction.changeVolume(to: 0, duration: 5.0))
+            bgMusicLoud = false
         }
     }
     
@@ -128,11 +133,11 @@ class DNZPresentationVideo: SKNode {
         case .Holdings:
             sectionPlay(Holdings())
         case .ContentPartners:
-            sectionPlay(magicHat)
+            sectionPlay(MagicHat())
         case .Stories:
             sectionPlay(Stories())
         case .API:
-            let api = API(magicHat: magicHat)
+            let api = API()
             sectionPlay(api)
             api.resumeHat()
         case .Outro:

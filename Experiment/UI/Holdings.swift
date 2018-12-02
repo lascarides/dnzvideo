@@ -20,7 +20,7 @@ class Holdings: Section {
         
         section     = VideoSections.Holdings
         voiceover   = SKAudioNode(url: URL(fileURLWithPath: "\(Settings.homePath)/voiceovers/02-holdings.m4a"))
-        duration    = 12.639 + 22.5
+        duration    = 12.639 + 23.0
         
         trigger(action: SKAction.run { self.revealVideo() }, delay: 12.639)
 

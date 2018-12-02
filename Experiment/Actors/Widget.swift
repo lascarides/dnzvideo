@@ -20,6 +20,10 @@ enum WidgetTypes {
     case Media
     case Govt
     case MagicHat
+    case API
+    case APIResearch
+    case APILibrary
+    case APIMobile
 }
 
 class Widget: SKNode {
@@ -57,6 +61,10 @@ class Widget: SKNode {
             icon = loadIcon(name: "use.png")
             matte.fillColor = Colour.sky
             label.text = "Use"
+        case .API:
+            icon = loadIcon(name: "use.png")
+            matte.fillColor = Colour.red
+            label.text = "API"
         case .Museum:
             icon = loadIcon(name: "museum.png")
             matte.fillColor = Colour.sky
@@ -91,13 +99,30 @@ class Widget: SKNode {
             icon = SKSpriteNode(texture: SKTexture(imageNamed: "\(Settings.homePath)/logo-only.png"))
             icon.scale(to: matte.frame.size)
             label.removeFromParent()
+        case .APIResearch:
+            icon = loadIcon(name: "api-research.png")
+            matte.fillColor = Colour.clear
+            label.removeFromParent()
+        case .APILibrary:
+            icon = loadIcon(name: "api-library.png")
+            matte.fillColor = Colour.clear
+            label.removeFromParent()
+        case .APIMobile:
+            icon = loadIcon(name: "api-mobile.png")
+            matte.fillColor = Colour.clear
+            label.removeFromParent()
         }
         
         if type != .MagicHat && type != .Natlib {
             icon.position = CGPoint(x: 0, y: 30)
             icon.scale(to: CGSize(width: 60, height: 60))
         }
-
+        
+        if type == .APIMobile || type == .APILibrary || type == .APIResearch {
+            icon.position = CGPoint(x: 0, y: 0)
+            icon.scale(to: CGSize(width: 200, height: 200))
+        }
+        
         addChild(icon)
 
     }
@@ -134,7 +159,7 @@ class Widget: SKNode {
             iconAction = SKAction.sequence([blipIn, blipOut])
         case .Share:
             iconAction = SKEase.rotate(easeFunction: .curveTypeExpo, easeType: .easeTypeInOut, time: 2.5, from: 0, to: .pi * 2)
-        case .Use:
+        case .Use, .API:
             let spinny = SKAction.rotate(byAngle: .pi, duration: 1.3)
             iconAction = SKAction.repeatForever(spinny)
         default:
